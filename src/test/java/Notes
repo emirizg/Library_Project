@@ -1,0 +1,31 @@
+
+#database info
+qa1.library.url=jdbc:mysql://34.230.35.214:3306/library1
+qa1.library.username=library1_client
+qa1.library.password=WVF4NdGXCKHeE6VQ
+#qa2 connection info
+qa2.library.url=jdbc:mysql://34.230.35.214:3306/library2
+qa2.library.username =library2_client
+qa2.library.password=6s2LQQTjBcGFfDhY
+
+    Login Function US-001,
+        1-User can login with valid credentials (We have 2 types user such as student and librarian).
+        2-User can not login with invalid credentials.
+            ==> Apache POI,
+
+    Log out Function US-002
+        User can log out by using log out button inside profile info
+            ==> UI
+
+    Add Book Function US-003
+
+
+
+
+
+
+
+
+
+
+
