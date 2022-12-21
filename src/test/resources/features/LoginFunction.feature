@@ -4,23 +4,40 @@ Feature: Login Function US-001
                 2-User can not login with invalid credentials.
 
   @wip
-  Scenario: 1.1-Librarian can login with valid credentials (We have 2 types user such as student and librarian).
+  Scenario Outline: 1.1-Librarian can login with valid credentials (We have 2 types user such as student and librarian).
     Given User is on the login page
-    When User enter "username" and "password"
-    And User click the login button
+    When User enter "<username>" and "<password>"
     Then Verify user logged in successfully
+    Examples:
+      | username           | password |
+      | librarian1@library | rs4BNN9G |
+      | librarian2@library | eb2VQKEj |
+      | librarian3@library | I6JMMwLb |
+      | librarian4@library | 7jrGZdaV |
+      | librarian5@library | 4p4ewVgW |
 
-  Scenario: 1.2-Student can login with valid credentials (We have 2 types user such as student and librarian).
+
+  Scenario Outline: 1.2-Student can login with valid credentials (We have 2 types user such as student and librarian).
     Given User is on the login page
-    When User enter "username" and "password"
-    And User click the login button
+    When User enter "<username>" and "<password>"
     Then Verify user logged in successfully
+    Examples:
+      | username         | password |
+      | student1@library | i2A9TgXa |
+      | student2@library | 80qynl9d |
+      | student3@library | 1f3ZGRGj |
+      | student4@library | 1AHF6MHk |
+      | student5@library | uElqihO2 |
 
-    Scenario: 2-User can not login with invalid credentials.
+  Scenario Outline: 2-User can not login with invalid credentials.
       Given User is on the login page
-      When User enter an invalid "username" and "password"
-      And User click the login button
+      When User enter <username> and <password>
       Then Verify user can not log in
+    Examples:
+      | username     | password  |
+      | stud@library | i2AasdgXa |
+      | stud@library | assdda    |
+
 
 
 
