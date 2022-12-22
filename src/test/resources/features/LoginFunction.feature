@@ -4,10 +4,15 @@ Feature: Login Function US-001
                 2-User can not login with invalid credentials.
 
   @wip
+  Scenario: verify information about logged user
+    Given I logged Library api using "librarian1@library" and "rs4BNN9G"
+    When I get the current user information from api
+    Then status code should be 200
+
   Scenario Outline: 1.1-Librarian can login with valid credentials (We have 2 types user such as student and librarian).
     Given User is on the login page
-    When User enter "<username>" and "<password>"
-    Then Verify user logged in successfully
+    When Librarian enter "<username>" and "<password>"
+    Then Verify Librarian logged in successfully
     Examples:
       | username           | password |
       | librarian1@library | rs4BNN9G |
@@ -19,8 +24,8 @@ Feature: Login Function US-001
 
   Scenario Outline: 1.2-Student can login with valid credentials (We have 2 types user such as student and librarian).
     Given User is on the login page
-    When User enter "<username>" and "<password>"
-    Then Verify user logged in successfully
+    When Student enter "<username>" and "<password>"
+    Then Verify Student logged in successfully
     Examples:
       | username         | password |
       | student1@library | i2A9TgXa |
@@ -29,9 +34,10 @@ Feature: Login Function US-001
       | student4@library | 1AHF6MHk |
       | student5@library | uElqihO2 |
 
+
   Scenario Outline: 2-User can not login with invalid credentials.
       Given User is on the login page
-      When User enter <username> and <password>
+      When User enter "<username>" and "<password>"
       Then Verify user can not log in
     Examples:
       | username     | password  |

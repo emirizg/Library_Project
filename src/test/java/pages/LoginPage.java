@@ -34,4 +34,7 @@ public class LoginPage {
     @FindBy(xpath = "//button[text()='Sign in']")
     public WebElement signIn_Button;
 
+    @FindBy(xpath = "//div[text()='Sorry, Wrong Email or Password']")
+    public WebElement errorMessage;
+
 }
