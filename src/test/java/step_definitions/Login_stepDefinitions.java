@@ -20,24 +20,30 @@ public class Login_stepDefinitions {
 
     String token;
 
+    Response response;
+
     @Given("I logged Library api using {string} and {string}")
     public void i_logged_Library_api_using_and(String email, String password) {
-        given().accept(ContentType.JSON)
+        response = given().accept(ContentType.JSON)
                 .and()
                 .header("x-library-token", ConfigurationReader.get("token"))
                 .when()
-                .get(ConfigurationReader.get("base_url") + "/get_book_categories")
-                .then().statusCode(200).log().body();
+                .get(ConfigurationReader.get("base_url") + "/get_book_categories");
+
+
+
+
     }
 
     @When("I get the current user information from api")
     public void i_get_the_current_user_information_from_api() {
 
+
     }
 
     @Then("status code should be {int}")
     public void status_code_should_be(Integer int1) {
-
+        Assert.assertEquals(response.getStatusCode(), 200);
     }
 
 
