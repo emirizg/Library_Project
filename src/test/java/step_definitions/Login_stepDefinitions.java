@@ -1,7 +1,6 @@
 package step_definitions;
 
 import io.cucumber.java.en.*;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.internal.common.assertion.Assertion;
 import io.restassured.path.json.JsonPath;
@@ -10,7 +9,6 @@ import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.LoginPage;
-import utilities.BrowserUtils;
 import utilities.ConfigurationReader;
 import utilities.DBUtils;
 import utilities.Driver;
@@ -35,22 +33,22 @@ public class Login_stepDefinitions {
                 .and()
                 .header("x-library-token", ConfigurationReader.get("token"))
                 .when()
-                .get(ConfigurationReader.get("base_url") + "/get_book_categories");
-
-
+                .get(ConfigurationReader.get("base_url") + "/get_book_categories")
+                .then()
+                .statusCode(200)
+                .log().body().extract().response();
 
 
     }
-
     @When("I get the current user information from api")
     public void i_get_the_current_user_information_from_api() {
 
-
     }
 
+
     @Then("status code should be {int}")
-    public void status_code_should_be(int int1) {
-        Assert.assertEquals(response.getStatusCode(), int1);
+    public void status_code_should_be(int statusCode) {
+        Assert.assertEquals(response.statusCode(), statusCode);
     }
 
 

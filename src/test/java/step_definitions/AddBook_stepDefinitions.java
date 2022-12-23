@@ -2,7 +2,9 @@ package step_definitions;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.junit.Assert;
 import utilities.ConfigurationReader;
 
 import java.util.LinkedHashMap;
@@ -27,18 +29,25 @@ public class AddBook_stepDefinitions {
 
 
 
-        response = given().contentType("application/x-www-form-urlencoded")
+        response = given().contentType(ContentType.JSON)
+                .accept("application/x-www-form-urlencoded")
                 .and()
                 .header("x-library-token", ConfigurationReader.get("token"))
                 .body(postRequestMap)
                 .when()
-                .post(ConfigurationReader.get("base_url") + "/add_book");
+                .post(ConfigurationReader.get("base_url") + "/add_book")
+                .then()
+                .statusCode(200)
+                .log().all().extract().response();
 
-        response.statusCode();
+        System.out.println(response.statusCode());
+
+
     }
 
     @Then("verify added book is visible on database")
     public void verifyAddedBookIsVisibleOnDatabase() {
+
 
     }
 }
