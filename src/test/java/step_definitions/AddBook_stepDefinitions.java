@@ -1,5 +1,6 @@
 package step_definitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.http.ContentType;
@@ -49,5 +50,11 @@ public class AddBook_stepDefinitions {
     public void verifyAddedBookIsVisibleOnDatabase() {
 
 
+    }
+
+    @And("statuscode should be {int}")
+    public void statuscodeShouldBe(int statusCode) {
+
+        Assert.assertEquals(response.statusCode(), statusCode);
     }
 }
