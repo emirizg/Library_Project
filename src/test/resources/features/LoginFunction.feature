@@ -44,6 +44,11 @@ Feature: Login Function US-001
       | stud@library | i2AasdgXa |
       | stud@library | assdda    |
 
+    @db
+    Scenario: verify book categories from api and database
+      Given I logged Library api using "librarian1@library" and "rs4BNN9G"
+      When I get the book categories from api and database
+      Then the book categories from api and database should match
 
 
 

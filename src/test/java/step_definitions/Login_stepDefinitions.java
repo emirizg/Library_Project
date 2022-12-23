@@ -3,6 +3,8 @@ package step_definitions;
 import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.internal.common.assertion.Assertion;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,7 +12,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.LoginPage;
 import utilities.BrowserUtils;
 import utilities.ConfigurationReader;
+import utilities.DBUtils;
 import utilities.Driver;
+
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
@@ -93,5 +98,32 @@ public class Login_stepDefinitions {
     }
 
 
+    @When("I get the book categories from api and database")
+    public void iGetTheBookCategoriesFromApiAndDatabase() {
 
+        // get info from database
+        String query="select name from book_categories";
+
+        List<Object> queryResultList = DBUtils.getColumnData(query, "name");
+
+        //System.out.println("queryResultList = " + queryResultList);
+
+
+        //get info from api
+        JsonPath jsonPath=response.jsonPath();
+
+        //response.prettyPrint();
+        List<Object> jsonPathList = jsonPath.getList("name");
+
+        //compare database and api
+        //System.out.println("jsonPathList = " + jsonPathList);
+
+        Assert.assertEquals(jsonPathList,queryResultList);
+
+
+    }
+
+    @Then("the book categories from api and database should match")
+    public void theBookCategoriesFromApiAndDatabaseShouldMatch() {
+    }
 }
