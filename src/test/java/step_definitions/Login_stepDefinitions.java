@@ -15,7 +15,9 @@ import utilities.ConfigurationReader;
 import utilities.DBUtils;
 import utilities.Driver;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -47,8 +49,8 @@ public class Login_stepDefinitions {
     }
 
     @Then("status code should be {int}")
-    public void status_code_should_be(Integer int1) {
-        Assert.assertEquals(response.getStatusCode(), 200);
+    public void status_code_should_be(int int1) {
+        Assert.assertEquals(response.getStatusCode(), int1);
     }
 
 
@@ -126,4 +128,14 @@ public class Login_stepDefinitions {
     @Then("the book categories from api and database should match")
     public void theBookCategoriesFromApiAndDatabaseShouldMatch() {
     }
+
+    @Given("User logged Library api using {string} and {string}")
+    public void userLoggedLibraryApiUsingAnd(String email, String password) {
+
+
+
+
+
+    }
+
 }

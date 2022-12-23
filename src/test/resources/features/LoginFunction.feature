@@ -3,7 +3,7 @@ Feature: Login Function US-001
   Agile Story : 1-User can login with valid credentials (We have 2 types user such as student and librarian).
                 2-User can not login with invalid credentials.
 
-  @wip
+
   Scenario: verify information about logged user
     Given I logged Library api using "librarian1@library" and "rs4BNN9G"
     When I get the current user information from api
