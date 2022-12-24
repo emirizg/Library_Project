@@ -7,6 +7,7 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import utilities.ConfigurationReader;
+import utilities.DBUtils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -39,15 +40,21 @@ public class AddBook_stepDefinitions {
                 .post(ConfigurationReader.get("base_url") + "/add_book")
                 .then()
                 .statusCode(200)
-                .log().all().extract().response();
+                .extract().response();
 
-        System.out.println(response.statusCode());
+
 
 
     }
 
     @Then("verify added book is visible on database")
     public void verifyAddedBookIsVisibleOnDatabase() {
+        String query="select name from books where name='Red Book'";
+        Object actualResult = DBUtils.getCellValue(query);
+
+        String expectedREsult="Red Book";
+
+        Assert.assertEquals(actualResult,expectedREsult);
 
 
     }
