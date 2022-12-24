@@ -29,6 +29,14 @@ public class Login_stepDefinitions {
 
     @Given("I logged Library api using {string} and {string}")
     public void i_logged_Library_api_using_and(String email, String password) {
+
+        //jamal created a token here, we put the token already in configuration.properties
+        //next step we will create response to get the data from api
+
+    }
+    @When("I get the current user information from api")
+    public void i_get_the_current_user_information_from_api() {
+
         response = given().accept(ContentType.JSON)
                 .and()
                 .header("x-library-token", ConfigurationReader.get("token"))
@@ -36,12 +44,9 @@ public class Login_stepDefinitions {
                 .get(ConfigurationReader.get("base_url") + "/get_book_categories")
                 .then()
                 .statusCode(200)
-                .log().body().extract().response();
+                .extract().response();
 
 
-    }
-    @When("I get the current user information from api")
-    public void i_get_the_current_user_information_from_api() {
 
     }
 
@@ -125,11 +130,15 @@ public class Login_stepDefinitions {
 
     @Then("the book categories from api and database should match")
     public void theBookCategoriesFromApiAndDatabaseShouldMatch() {
+
+        //asserted on the previous step --> line 126
     }
 
     @Given("User logged Library api using {string} and {string}")
     public void userLoggedLibraryApiUsingAnd(String email, String password) {
 
+        //jamal created a token here, we put the token already in configuration.properties
+        //next step we will create response to get the data from api
 
 
 
